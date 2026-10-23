@@ -48,8 +48,8 @@ General error body: `{ "error": "message" }`, optionally with a stable `code` (e
 
 | Event | Source | Identifier | Signature | Status |
 |---|---|---|---|---|
-| Invoice paid | `/docs/miniapps/payments` | `transaction_uuid` | `x-qvapay-signature: sha256=<hex>` = HMAC-SHA256(raw body, `app-secret`); `x-qvapay-timestamp` = Unix seconds | verified |
-| Top-up credited | `/docs/merchants/topup-webhook` | `uuid` | same scheme, **only** when the top-up was created with app credentials; Bearer-created top-ups arrive **unsigned** | verified |
+| Invoice paid | `/docs/miniapps/payments` | `transaction_uuid` | `x-qvapay-signature: sha256=<hex>` = HMAC-SHA256(raw body, `app-secret`); `x-qvapay-timestamp` = Unix seconds | tested |
+| Top-up credited | `/docs/merchants/topup-webhook` | `uuid` | same scheme, **only** when the top-up was created with app credentials; Bearer-created top-ups arrive **unsigned** (the SDK rejects unsigned) | tested |
 
 Invoice payload: `transaction_uuid, remote_id, status, amount (string), signed (number), created_at, updated_at`.
 Top-up payload: `uuid, status ("paid"), is_partial, amount (string USD credited), requested_usd (number), received_crypto (string), coin, tx_id (nullable), paid_at`.

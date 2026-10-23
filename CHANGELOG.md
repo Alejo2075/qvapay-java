@@ -17,3 +17,5 @@ All notable changes to this project are documented here. The format follows
 - Transactions `get(uuid)` (`POST /v2/transactions/{uuid}`) with the `PaidBy` payer.
 - Payments `authorize()` (`POST /v2/authorize_payments`): returns the consent URL for the user; never retried.
 - Payments `charge()` (`POST /v2/charge`): moves money, never retried (including real timeouts).
+- Webhooks: `Webhooks.verify/sign` (HMAC-SHA256 over raw bytes, constant-time) and `WebhookVerifier` with optional timestamp tolerance (default 300 s, injectable `Clock`).
+- Distinct `InvoiceWebhookEvent` (`transaction_uuid`) and `TopUpWebhookEvent` (`uuid`); the payload is parsed only after verification and unsigned top-up webhooks are rejected.
