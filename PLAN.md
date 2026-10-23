@@ -6,6 +6,21 @@
 
 ---
 
+## Estado de ejecución (actualizado 2026-10-23)
+
+| Hito | Estado |
+|---|---|
+| M0 – M11 | **Completados** y fusionados en `main` (ver `git log`) |
+| M12 – Release 0.1.0 | **Pendiente: requiere aprobación humana** (ver `docs/release.md`, sección *Human setup required*) |
+
+Desviaciones respecto al plan original (todas documentadas en sus commits):
+
+- Propietario/namespace: `Alejo2075` / `io.github.alejo2075` (tomado de la cuenta `gh` autenticada). Falta crear el repo en GitHub y verificar el namespace en Central.
+- Las clases `MerchantApi`, `InvoiceApi`, `TransactionApi` y `PaymentsApi` viven en el paquete raíz (constructores package-private) y cada operación tiene su método `...Async` en vez de una vista `client.async()`.
+- google-java-format fijado en 1.27.0: las versiones recientes necesitan Java 21 para ejecutarse y el JDK principal es 17.
+- Se añadieron `scripts/readme_snippets.py` (snippets del README generados desde los ejemplos) y `scripts/verify_bundle.py` (inspección del bundle de Central sin subir nada).
+- Descubierto con JDK 21: `-Xlint:serial` (corregido) y la interacción de JaCoCo con `-DskipTests` (corregida).
+
 ## 0. Resumen
 
 | Hito | Contenido | Resultado verificable |
