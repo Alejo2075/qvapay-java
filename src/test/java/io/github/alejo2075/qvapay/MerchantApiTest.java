@@ -71,4 +71,41 @@ class MerchantApiTest {
                         FakeTransport.json(200, "{\"uuid\":\"u\",\"new_field\":123}"));
         assertEquals("u", Clients.withApp(t).merchant().info().uuid());
     }
+
+    @Test
+    void balanceUsesPostV2BalanceAndKeepsExactDecimals() {
+        FakeTransport t =
+                FakeTransport.returning(
+                        FakeTransport.json(200, Fixtures.load("merchant/balance.json")));
+        var balance = Clients.withApp(t).merchant().balance();
+
+        var req = t.lastRequest();
+        assertEquals("POST", req.method());
+        assertEquals("https://api.qvapay.com/v2/balance", req.uri().toString());
+        assertEquals(Clients.APP_ID, req.headers().get("app-id"));
+        assertEquals(new java.math.BigDecimal("150.75"), balance.balance());
+    }
+
+    @Test
+    void balanceAcceptsNumbersAndDecimalStrings() throws Exception {
+        FakeTransport t =
+                FakeTransport.returning(FakeTransport.json(200, "{\"balance\": \"0.10\"}"));
+        assertEquals(
+                new java.math.BigDecimal("0.10"),
+                Clients.withApp(t).merchant().balanceAsync().get().balance());
+        FakeTransport t2 = FakeTransport.returning(FakeTransport.json(200, "{\"balance\": 0.1}"));
+        assertEquals(
+                0,
+                new java.math.BigDecimal("0.1")
+                        .compareTo(Clients.withApp(t2).merchant().balance().balance()));
+    }
+
+    @Test
+    void ownerNotFoundIsNotFoundException() {
+        FakeTransport t =
+                FakeTransport.returning(FakeTransport.json(404, "{\"error\":\"User not found\"}"));
+        assertThrows(
+                io.github.alejo2075.qvapay.exception.NotFoundException.class,
+                () -> Clients.withApp(t).merchant().balance());
+    }
 }

@@ -4,6 +4,7 @@ import io.github.alejo2075.qvapay.auth.AuthPolicy;
 import io.github.alejo2075.qvapay.internal.JsonCodec;
 import io.github.alejo2075.qvapay.internal.Operation;
 import io.github.alejo2075.qvapay.internal.RequestExecutor;
+import io.github.alejo2075.qvapay.model.AppBalance;
 import io.github.alejo2075.qvapay.model.AppInfo;
 import java.util.concurrent.CompletableFuture;
 
@@ -18,6 +19,9 @@ import java.util.concurrent.CompletableFuture;
 public final class MerchantApi {
 
     private static final Operation INFO = Operation.post("/v2/info", null, AuthPolicy.APP, true);
+
+    private static final Operation BALANCE =
+            Operation.post("/v2/balance", null, AuthPolicy.APP, true);
 
     private final RequestExecutor executor;
 
@@ -44,5 +48,25 @@ public final class MerchantApi {
      */
     public CompletableFuture<AppInfo> infoAsync() {
         return executor.executeAsync(INFO, b -> JsonCodec.read(b, AppInfo.class));
+    }
+
+    /**
+     * Returns the current balance of the app owner, in USD.
+     *
+     * @return the balance
+     * @throws io.github.alejo2075.qvapay.exception.NotFoundException if the owner user is not found
+     * @throws io.github.alejo2075.qvapay.exception.QvaPayException on any other failure
+     */
+    public AppBalance balance() {
+        return executor.execute(BALANCE, b -> JsonCodec.read(b, AppBalance.class));
+    }
+
+    /**
+     * Asynchronous form of {@link #balance()}.
+     *
+     * @return a future with the balance
+     */
+    public CompletableFuture<AppBalance> balanceAsync() {
+        return executor.executeAsync(BALANCE, b -> JsonCodec.read(b, AppBalance.class));
     }
 }
