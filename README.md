@@ -12,7 +12,7 @@
 
 > **Unofficial SDK.** This project is community maintained and is not affiliated with, endorsed by or supported by QvaPay. Official API documentation: <https://www.qvapay.com/docs>.
 
-> **Status: pre-release (`0.1.0-SNAPSHOT`).** Package status: not yet published to Maven Central. See [Installation](#installation) to use it from a local build.
+> **Status: pre-release (`0.1.0`).** Package status: not yet published to Maven Central. See [Installation](#installation) to use it from a local build.
 
 [![CI](https://github.com/Alejo2075/qvapay-java/actions/workflows/ci.yml/badge.svg)](https://github.com/Alejo2075/qvapay-java/actions/workflows/ci.yml) ![License](https://img.shields.io/badge/license-MIT-blue) ![Java](https://img.shields.io/badge/Java-17%2B-orange) ![Status](https://img.shields.io/badge/status-pre--release-yellow)
 
@@ -67,7 +67,7 @@ Then add the dependency to your project. The coordinates will be the same after 
 <dependency>
   <groupId>io.github.alejo2075</groupId>
   <artifactId>qvapay-java</artifactId>
-  <version>0.1.0-SNAPSHOT</version>
+  <version>0.1.0</version>
 </dependency>
 ```
 
@@ -80,7 +80,7 @@ repositories {
 }
 
 dependencies {
-    implementation("io.github.alejo2075:qvapay-java:0.1.0-SNAPSHOT")
+    implementation("io.github.alejo2075:qvapay-java:0.1.0")
 }
 ```
 
@@ -93,7 +93,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'io.github.alejo2075:qvapay-java:0.1.0-SNAPSHOT'
+    implementation 'io.github.alejo2075:qvapay-java:0.1.0'
 }
 ```
 

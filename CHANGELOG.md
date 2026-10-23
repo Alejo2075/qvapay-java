@@ -6,6 +6,10 @@ All notable changes to this project are documented here. The format follows
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-10-23
+
+First release. Unofficial, community-maintained SDK for the QvaPay merchant API (`/v2`), based on the public documentation as of 2026-10-22.
+
 ### Added
 
 - `QvaPayClient` builder with HTTPS-only base URL, timeouts and opt-in read retries.
