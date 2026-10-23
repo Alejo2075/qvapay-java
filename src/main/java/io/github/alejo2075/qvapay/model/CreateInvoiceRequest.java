@@ -191,15 +191,7 @@ public final class CreateInvoiceRequest {
             if (webhook != null) {
                 Validation.httpUrl(webhook, "webhook");
             }
-            for (InvoiceProduct p : products) {
-                Validation.text(p.name(), "product name");
-                if (p.price() == null || p.price().signum() < 0) {
-                    throw new IllegalArgumentException("product price must not be negative");
-                }
-                if (p.quantity() != null && p.quantity().signum() <= 0) {
-                    throw new IllegalArgumentException("product quantity must be greater than 0");
-                }
-            }
+            Validation.products(products);
             if (expireAt != null) {
                 Validation.future(expireAt, "expireAt");
             }

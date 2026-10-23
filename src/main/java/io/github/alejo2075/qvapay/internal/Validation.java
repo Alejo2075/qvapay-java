@@ -1,11 +1,13 @@
 package io.github.alejo2075.qvapay.internal;
 
+import io.github.alejo2075.qvapay.model.InvoiceProduct;
 import java.math.BigDecimal;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.Instant;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Locale;
 
 /** Argument validation and wire formatting shared by request types. */
@@ -90,6 +92,23 @@ public final class Validation {
             // reported below
         }
         throw new IllegalArgumentException(name + " must be a valid http(s) URL");
+    }
+
+    /**
+     * Validates product lines: non-blank name, non-negative price, positive quantity when given.
+     *
+     * @param products the products
+     */
+    public static void products(List<InvoiceProduct> products) {
+        for (InvoiceProduct p : products) {
+            text(p.name(), "product name");
+            if (p.price() == null || p.price().signum() < 0) {
+                throw new IllegalArgumentException("product price must not be negative");
+            }
+            if (p.quantity() != null && p.quantity().signum() <= 0) {
+                throw new IllegalArgumentException("product quantity must be greater than 0");
+            }
+        }
     }
 
     /**

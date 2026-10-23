@@ -12,3 +12,4 @@ All notable changes to this project are documented here. The format follows
 - Merchant `info()` (`POST /v2/info`).
 - Merchant `balance()` (`POST /v2/balance`) returning `BigDecimal`.
 - Invoices `create()` (`POST /v2/create_invoice`) with client-side validation of the documented limits; never retried.
+- Invoices `modify()` (`POST /v2/modify_invoice`), distinguishing an absent `expire_at` from an explicit `null` (`resetExpireAt()`).
