@@ -21,7 +21,7 @@ jobs:
       matrix:
         java: ['17', '21']
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: actions/setup-java@v6
         with:
           distribution: temurin
@@ -37,7 +37,7 @@ jobs:
     runs-on: ubuntu-latest
     continue-on-error: true
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: actions/setup-java@v6
         with:
           distribution: temurin
@@ -57,7 +57,7 @@ jobs:
       matrix:
         java: ['17', '21']
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       # JDK 17 is always installed: the Gradle examples use a Java 17 toolchain.
       # The last entry becomes the default JAVA_HOME.
       - uses: actions/setup-java@v6
@@ -84,14 +84,14 @@ jobs:
     name: README snippets match the compiled examples
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - run: python3 scripts/readme_snippets.py check
 
   secret-scan:
     name: Secret scan
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
       - uses: gitleaks/gitleaks-action@v2
@@ -103,7 +103,7 @@ jobs:
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: actions/dependency-review-action@v5
         with:
           fail-on-severity: high
