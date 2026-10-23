@@ -5,9 +5,8 @@ plugins {
 }
 
 repositories {
-    // Pre-release: the SDK is installed locally with `./mvnw install` from the repository root.
-    mavenLocal()
-    // Once the SDK is published, mavenCentral() is all you need (remove mavenLocal()).
+    // The SDK is published on Maven Central: no other repository is needed.
+    // To try unreleased changes, run `./mvnw install` and add mavenLocal() above mavenCentral().
     mavenCentral()
 }
 

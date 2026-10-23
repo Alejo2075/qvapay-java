@@ -2,6 +2,14 @@
 
 How to publish the SDK to Maven Central. **Nothing here runs automatically and nothing has been published yet.** Publishing needs the maintainer's explicit decision and several things only the maintainer can provide (see [Human setup required](#human-setup-required)).
 
+## Release history
+
+| Version | Date | Notes |
+|---|---|---|
+| 0.1.0 | 2026-10-23 | First release; published to Maven Central, signed with key `BC2FB2385127DC8345884595564BA523FA3BCCF6` (expires 2028-10-22, renew before then). Verified from clean Maven and Gradle consumers and with `gpg --verify` against the public keyserver. |
+
+The signing key backup and its passphrase are kept by the maintainer outside the repository. Rotate the Portal token after any exposure.
+
 ## Baseline
 
 | Item | Value |
@@ -21,15 +29,15 @@ The old OSSRH/Nexus staging flow is not used. Published versions are immutable: 
 These steps cannot be done by the build or by an assistant:
 
 - [x] Public GitHub repository `Alejo2075/qvapay-java` created and pushed.
-- [ ] Verify the namespace `io.github.alejo2075` in the [Central Portal](https://central.sonatype.com/publishing/namespaces) (log in with GitHub and follow the instructions to prove ownership).
+- [x] Verify the namespace `io.github.alejo2075` in the [Central Portal](https://central.sonatype.com/publishing/namespaces) (log in with GitHub and follow the instructions to prove ownership).
 - [ ] Confirm the maintainer data and the license (`LICENSE` is MIT, © 2026 Alejo2075; the POM lists *Alejandro Santana* as developer). Change both if you prefer other public details.
-- [ ] Generate a **Portal user token** (Central Portal → Account → *Generate User Token*).
-- [ ] Create a GPG key pair, publish the public key to a keyserver (for example `keys.openpgp.org`), keep the private key out of the repository.
+- [x] Generate a **Portal user token** (Central Portal → Account → *Generate User Token*).
+- [x] Create a GPG key pair, publish the public key to a keyserver (for example `keys.openpgp.org`), keep the private key out of the repository.
 - [x] GitHub environment `maven-central` exists with a required reviewer and is limited to protected branches.
-- [ ] Add the environment secrets (Settings → Environments → maven-central) `CENTRAL_TOKEN_USERNAME`, `CENTRAL_TOKEN_PASSWORD`, `GPG_PRIVATE_KEY` (ASCII-armored export) and `GPG_PASSPHRASE`.
+- [x] Add the environment secrets (Settings → Environments → maven-central) `CENTRAL_TOKEN_USERNAME`, `CENTRAL_TOKEN_PASSWORD`, `GPG_PRIVATE_KEY` (ASCII-armored export) and `GPG_PASSPHRASE`.
 - [x] `main` protected (pull request, required status checks, no force-push, linear history). Private vulnerability reporting, secret scanning with push protection and Dependabot alerts are enabled.
 - [ ] A QvaPay app in **test mode** if you want to run the manual integration checks below.
-- [ ] Explicit approval to publish.
+- [x] Explicit approval to publish (given for 0.1.0; each release needs its own).
 
 ## One-time machine setup (for local releases)
 

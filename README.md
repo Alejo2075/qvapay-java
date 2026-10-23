@@ -12,9 +12,9 @@
 
 > **Unofficial SDK.** This project is community maintained and is not affiliated with, endorsed by or supported by QvaPay. Official API documentation: <https://www.qvapay.com/docs>.
 
-> **Status: pre-release (`0.1.0`).** Package status: not yet published to Maven Central. See [Installation](#installation) to use it from a local build.
+> **Status: `0.1.0` is available on [Maven Central](https://central.sonatype.com/artifact/io.github.alejo2075/qvapay-java).** Early release: the API follows the public QvaPay docs and has been tested offline only (see [Features](#features)).
 
-[![CI](https://github.com/Alejo2075/qvapay-java/actions/workflows/ci.yml/badge.svg)](https://github.com/Alejo2075/qvapay-java/actions/workflows/ci.yml) ![License](https://img.shields.io/badge/license-MIT-blue) ![Java](https://img.shields.io/badge/Java-17%2B-orange) ![Status](https://img.shields.io/badge/status-pre--release-yellow)
+[![CI](https://github.com/Alejo2075/qvapay-java/actions/workflows/ci.yml/badge.svg)](https://github.com/Alejo2075/qvapay-java/actions/workflows/ci.yml) [![Maven Central](https://img.shields.io/maven-central/v/io.github.alejo2075/qvapay-java)](https://central.sonatype.com/artifact/io.github.alejo2075/qvapay-java) [![Javadoc](https://img.shields.io/badge/javadoc-0.1.0-blue)](https://alejo2075.github.io/qvapay-java/) ![License](https://img.shields.io/badge/license-MIT-blue) ![Java](https://img.shields.io/badge/Java-17%2B-orange)
 
 ---
 
@@ -51,15 +51,7 @@ All behaviour is derived from the public QvaPay docs; see [docs/api-coverage.md]
 
 ## Installation
 
-> Package status: not yet published to Maven Central. Until the first release, build and install it locally:
->
-> ```bash
-> git clone https://github.com/Alejo2075/qvapay-java.git
-> cd qvapay-java
-> ./mvnw install
-> ```
-
-Then add the dependency to your project. The coordinates will be the same after publication.
+Available on Maven Central; no extra repositories are needed.
 
 **Maven**
 
@@ -75,7 +67,6 @@ Then add the dependency to your project. The coordinates will be the same after 
 
 ```kotlin
 repositories {
-    mavenLocal()    // pre-release only; after publication mavenCentral() is enough
     mavenCentral()
 }
 
@@ -88,7 +79,6 @@ dependencies {
 
 ```groovy
 repositories {
-    mavenLocal()    // pre-release only; after publication mavenCentral() is enough
     mavenCentral()
 }
 
@@ -279,7 +269,7 @@ Jackson 3 (`tools.jackson`) is an implementation detail and does not clash with 
 | Reference repositories studied | [docs/references.md](docs/references.md) |
 | Release procedure | [docs/release.md](docs/release.md) |
 | Javadoc (API reference) | <https://alejo2075.github.io/qvapay-java/> (also `./mvnw javadoc:javadoc` locally) |
-| Maven artifact | `io.github.alejo2075:qvapay-java` — not yet on Maven Central; see [Installation](#installation) |
+| Maven artifact | [`io.github.alejo2075:qvapay-java:0.1.0`](https://central.sonatype.com/artifact/io.github.alejo2075/qvapay-java) on Maven Central |
 | Official QvaPay API | <https://www.qvapay.com/docs> |
 
 ## Contributing, roadmap, license

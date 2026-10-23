@@ -12,9 +12,9 @@
 
 > **SDK no oficial.** Este proyecto lo mantiene la comunidad y no tiene relación con QvaPay, ni cuenta con su respaldo o soporte. Documentación oficial de la API: <https://www.qvapay.com/docs>.
 
-> **Estado: pre-release (`0.1.0`).** Estado del paquete: todavía no está publicado en Maven Central. Mira [Instalación](#instalación) para usarlo desde una compilación local.
+> **Estado: `0.1.0` disponible en [Maven Central](https://central.sonatype.com/artifact/io.github.alejo2075/qvapay-java).** Versión temprana: sigue la documentación pública de QvaPay y solo se ha probado sin red (ver [Funcionalidades](#funcionalidades)).
 
-[![CI](https://github.com/Alejo2075/qvapay-java/actions/workflows/ci.yml/badge.svg)](https://github.com/Alejo2075/qvapay-java/actions/workflows/ci.yml) ![License](https://img.shields.io/badge/license-MIT-blue) ![Java](https://img.shields.io/badge/Java-17%2B-orange) ![Status](https://img.shields.io/badge/status-pre--release-yellow)
+[![CI](https://github.com/Alejo2075/qvapay-java/actions/workflows/ci.yml/badge.svg)](https://github.com/Alejo2075/qvapay-java/actions/workflows/ci.yml) [![Maven Central](https://img.shields.io/maven-central/v/io.github.alejo2075/qvapay-java)](https://central.sonatype.com/artifact/io.github.alejo2075/qvapay-java) [![Javadoc](https://img.shields.io/badge/javadoc-0.1.0-blue)](https://alejo2075.github.io/qvapay-java/) ![License](https://img.shields.io/badge/license-MIT-blue) ![Java](https://img.shields.io/badge/Java-17%2B-orange)
 
 ---
 
@@ -51,13 +51,7 @@
 
 ## Instalación
 
-> Estado del paquete: todavía no está publicado en Maven Central. Mientras tanto, compílalo e instálalo en local:
->
-> ```bash
-> git clone https://github.com/Alejo2075/qvapay-java.git
-> cd qvapay-java
-> ./mvnw install
-> ```
+Disponible en Maven Central; no necesitas repositorios adicionales.
 
 **Maven**
 
@@ -73,7 +67,6 @@
 
 ```kotlin
 repositories {
-    mavenLocal()    // solo antes de publicar; después basta con mavenCentral()
     mavenCentral()
 }
 
@@ -86,7 +79,6 @@ dependencies {
 
 ```groovy
 repositories {
-    mavenLocal()    // solo antes de publicar; después basta con mavenCentral()
     mavenCentral()
 }
 
