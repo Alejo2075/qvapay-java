@@ -11,3 +11,4 @@ All notable changes to this project are documented here. The format follows
 - `QvaPayClient` builder with HTTPS-only base URL, timeouts and opt-in read retries.
 - Merchant `info()` (`POST /v2/info`).
 - Merchant `balance()` (`POST /v2/balance`) returning `BigDecimal`.
+- Invoices `create()` (`POST /v2/create_invoice`) with client-side validation of the documented limits; never retried.

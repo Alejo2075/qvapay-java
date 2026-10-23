@@ -1,0 +1,1 @@
+{"amount":25.00,"description":"Compra de producto digital","remote_id":"order-12345","webhook":"https://mitienda.com/webhook/qvapay","products":[{"name":"Producto 1","price":15.00,"quantity":1},{"name":"Producto 2","price":10.00,"quantity":1}],"expire_at":"2999-12-31T23:59:59.000Z"}

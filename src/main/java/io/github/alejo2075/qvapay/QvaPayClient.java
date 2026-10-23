@@ -37,11 +37,13 @@ public final class QvaPayClient {
     private final ClientSettings settings;
     private final RequestExecutor executor;
     private final MerchantApi merchant;
+    private final InvoiceApi invoices;
 
     private QvaPayClient(ClientSettings settings) {
         this.settings = settings;
         this.executor = new RequestExecutor(settings);
         this.merchant = new MerchantApi(executor);
+        this.invoices = new InvoiceApi(executor);
     }
 
     /**
@@ -60,6 +62,15 @@ public final class QvaPayClient {
      */
     public MerchantApi merchant() {
         return merchant;
+    }
+
+    /**
+     * Returns the invoice operations (create, modify).
+     *
+     * @return the invoice API
+     */
+    public InvoiceApi invoices() {
+        return invoices;
     }
 
     /**

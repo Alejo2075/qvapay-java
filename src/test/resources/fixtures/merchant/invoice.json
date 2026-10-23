@@ -1,0 +1,9 @@
+{
+  "app_id": "550e8400-e29b-41d4-a716-446655440000",
+  "amount": 25.00,
+  "description": "Compra de producto digital",
+  "remote_id": "order-12345",
+  "transaction_uuid": "7c9e6679-7425-40de-944b-e07fc1f90ae7",
+  "expire_at": "2024-12-31T23:59:59.000Z",
+  "url": "https://www.qvapay.com/pay/7c9e6679-7425-40de-944b-e07fc1f90ae7"
+}
