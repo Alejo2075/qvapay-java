@@ -1,12 +1,12 @@
 <div align="center">
 
-# QvaPay Java SDK
+<img src="docs/assets/logo.png" alt="QvaPay Java SDK" width="560">
 
 **Un SDK de Java ligero, tipado y sin dependencia de frameworks para la API de QvaPay.**
 
 `Java 17+` · `Construido con JDK 17 LTS` · `Maven y Gradle` · `Mantenido por la comunidad`
 
-[Inicio rápido](#inicio-rápido) · [Ejemplos](examples/) · [Cobertura de la API](docs/api-coverage.md) · [English](README.md)
+[Inicio rápido](#inicio-rápido) · [Ejemplos](examples/) · [Cobertura de la API](docs/api-coverage.md) · [Javadoc](https://alejo2075.github.io/qvapay-java/) · [English](README.md)
 
 </div>
 

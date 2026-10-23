@@ -1,12 +1,12 @@
 <div align="center">
 
-# QvaPay Java SDK
+<img src="docs/assets/logo.png" alt="QvaPay Java SDK" width="560">
 
 **A lightweight, type-safe, framework-agnostic Java SDK for the QvaPay API.**
 
 `Java 17+` · `Built with JDK 17 LTS` · `Maven & Gradle` · `Framework-agnostic` · `Community maintained`
 
-[Quick start](#quick-start) · [Examples](examples/) · [API coverage](docs/api-coverage.md) · [Español](README.es.md)
+[Quick start](#quick-start) · [Examples](examples/) · [API coverage](docs/api-coverage.md) · [Javadoc](https://alejo2075.github.io/qvapay-java/) · [Español](README.es.md)
 
 </div>
 
@@ -278,7 +278,8 @@ Jackson 3 (`tools.jackson`) is an implementation detail and does not clash with 
 | Troubleshooting / FAQ | [docs/troubleshooting.md](docs/troubleshooting.md) |
 | Reference repositories studied | [docs/references.md](docs/references.md) |
 | Release procedure | [docs/release.md](docs/release.md) |
-| Javadoc | Built with `./mvnw javadoc:javadoc`; published with the first release |
+| Javadoc (API reference) | <https://alejo2075.github.io/qvapay-java/> (also `./mvnw javadoc:javadoc` locally) |
+| Maven artifact | `io.github.alejo2075:qvapay-java` — not yet on Maven Central; see [Installation](#installation) |
 | Official QvaPay API | <https://www.qvapay.com/docs> |
 
 ## Contributing, roadmap, license

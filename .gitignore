@@ -19,3 +19,4 @@ settings-ci.xml
 
 # OS
 .DS_Store
+apidocs/
