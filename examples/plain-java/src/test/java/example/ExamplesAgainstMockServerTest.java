@@ -48,6 +48,10 @@ class ExamplesAgainstMockServerTest {
                 json = "{\"app_id\":\"a\",\"amount\":25.00,\"description\":\"Test invoice\",\"remote_id\":\"order-12345\","
                         + "\"transaction_uuid\":\"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\"expire_at\":null,"
                         + "\"url\":\"https://www.qvapay.com/pay/7c9e6679-7425-40de-944b-e07fc1f90ae7\"}";
+            } else if (path.equals("/v2/authorize_payments")) {
+                json = "{\"message\":\"Authorize payments\",\"url\":\"https://qvapay.com/authorize_payments?app_uuid=a\"}";
+            } else if (path.equals("/v2/charge")) {
+                json = "{\"success\":true,\"message\":\"ok\",\"transaction\":{\"uuid\":\"t\",\"amount\":10.00,\"status\":\"paid\"}}";
             } else if (path.startsWith("/v2/transactions/")) {
                 json = "{\"message\":\"APP Transaction\",\"transaction\":{\"uuid\":\"u\",\"status\":\"paid\"}}";
             } else {
@@ -113,5 +117,16 @@ class ExamplesAgainstMockServerTest {
         var event = verifier.verifyInvoice(body, Webhooks.sign(body, secret), timestamp).event();
         assertEquals("order-12345", event.remoteId());
         assertEquals(new BigDecimal("25.00"), event.amount());
+    }
+
+    @Test
+    void authorizesAndChargesAgainstTheMockOnly() {
+        QvaPayClient client = client();
+        assertTrue(PaymentsExample.consentUrl(client).startsWith("https://qvapay.com/authorize_payments"));
+        assertTrue(lastBody.get().contains("\"remote_id\":\"user-001\""));
+        var result = PaymentsExample.charge(client, "user-uuid");
+        assertTrue(result.success());
+        assertEquals(new BigDecimal("10.00"), result.transaction().amount());
+        assertTrue(lastBody.get().contains("\"user_uuid\":\"user-uuid\""));
     }
 }
