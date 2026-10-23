@@ -118,6 +118,8 @@ public static void main(String[] args) {
 }
 ```
 
+> **Modo prueba.** Con una app en modo prueba QvaPay marca la factura como `paid` al instante y no devuelve página de pago, por lo que `invoice.url()` es `null`. Fuera del modo prueba, `url()` es la página de pago del cliente.
+
 La versión completa y compilable está en [QuickStart.java](examples/plain-java/src/main/java/example/QuickStart.java).
 
 ## Verificar un webhook

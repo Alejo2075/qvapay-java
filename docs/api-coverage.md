@@ -44,6 +44,24 @@ All merchant operations authenticate with `app-id` + `app-secret` **headers** (n
 
 General error body: `{ "error": "message" }`, optionally with a stable `code` (e.g. `KYC_REQUIRED`, `DUPLICATE_REQUEST`). Logic must use `code` when present, never the message text.
 
+## Live verification in test mode (2026-10-23)
+
+Run by hand with SDK 0.1.0/0.2.0-SNAPSHOT against `https://api.qvapay.com` using an app in **test mode** (no real funds). Only read operations plus a few 1.00 USD test invoices; `charge` and `authorize_payments` were **not** called.
+
+| Operation | Result | Difference from the docs |
+|---|---|---|
+| `POST /v2/info` | OK, all documented fields present | none |
+| `POST /v2/balance` | OK | **The body is the bare number `25`, not `{"balance": 25}`.** 0.1.0 failed to parse it; fixed (both forms accepted). |
+| `POST /v2/create_invoice` | OK | In test mode the response has **no `url`** and adds `status: "paid"`, `test: true`, `reference: "TEST-<uuid>"`, `test_balance`. `amount` comes back as the string `"1"`. The invoice is **paid immediately**. |
+| `POST /v2/transactions/{uuid}` | OK | `amount` is a string; `PaidBy` is `null` even though `status` is `paid` (test mode). |
+| `POST /v2/modify_invoice` | 400 `Solo se pueden modificar transacciones pendientes` | Matches the docs (only `pending`); test invoices are never pending, so this path could not be exercised end to end. |
+| `POST /v2/transactions` (list) | OK, but **empty** (`"transactions": []`) with `{}`, `{page:1,take:30}` and `{page:0}` even right after creating test invoices | Not documented: test-mode transactions do not appear in the list. Production behaviour unverified. |
+| `POST /v2/transactions/{unknown-uuid}` | 404 `{"error": "APP Transaction not found"}` | matches |
+| wrong `app-secret` | 401 `Unauthorized` | message text only; no `code` |
+| invoice webhook | verified only with a locally signed payload | QvaPay's own webhook delivery was not exercised (needs a public HTTPS endpoint) |
+
+Not verified live: a real (non-test) invoice, `url` format in production, `modify_invoice` on a pending invoice, `authorize_payments`, `charge`, top-up webhook, delivery retries, rate-limit headers.
+
 ## Webhooks (release 0.1.0)
 
 | Event | Source | Identifier | Signature | Status |
@@ -76,4 +94,7 @@ Delivery: up to three attempts (about 0 s, 5 s, 30 s) on `429`, `5xx`, timeout o
 4. Whether `info` / `balance` accept a missing request body with `Content-Type: application/json` on all gateways. (The SDK sends an empty JSON object `{}`; verify with a test-mode app.)
 5. Meaning and possible values of `PaidBy.kyc`. Stored as a string.
 6. The topup webhook page mentions creating top-ups with `POST /api/topup`, a route outside the documented merchant set.
+8. Is the bare-number `balance` response the normal format or a test-mode artifact? Both are accepted.
+9. Why does `POST /v2/transactions` return no test-mode transactions? Does production list them?
+10. Which fields (`status`, `test`, `reference`, `test_balance`) can appear in `create_invoice` responses, and is `url` always present outside test mode?
 7. Whether the ±300 s timestamp window is a QvaPay-side guarantee or only the official plugin's convention.

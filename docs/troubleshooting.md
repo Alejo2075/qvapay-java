@@ -36,6 +36,12 @@ All SDK exceptions extend the unchecked `QvaPayException`.
 
 **`403 KYC_REQUIRED`**: the account of the app owner/user needs identity verification in QvaPay. The SDK cannot bypass it.
 
+**`invoice.url()` is `null`**: the app is in test mode. QvaPay pays test invoices immediately and returns no payment page (`status()` is `PAID`, `test()` is `true`). A non-test app returns the payment URL.
+
+**`modify` fails with `Solo se pueden modificar transacciones pendientes`**: only `pending` invoices can be modified, and test-mode invoices are created already paid.
+
+**`transactions().list()` is empty after creating invoices**: observed for test-mode transactions; they were retrievable with `get(uuid)` but not listed.
+
 **Timeouts**: defaults are 5 s to connect and 15 s per request. Change them with `connectTimeout(...)` / `requestTimeout(...)`.
 
 ## Unsure what the API does?
