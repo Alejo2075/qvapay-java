@@ -1,5 +1,7 @@
 package io.github.alejo2075.qvapay.webhook;
 
+import io.github.alejo2075.qvapay.exception.SerializationException;
+import io.github.alejo2075.qvapay.internal.JsonCodec;
 import java.security.MessageDigest;
 import java.time.Clock;
 import java.time.Duration;
@@ -99,6 +101,34 @@ public final class WebhookVerifier {
             return true;
         } catch (WebhookVerificationException e) {
             return false;
+        }
+    }
+
+    /**
+     * Verifies an invoice-payment webhook and, only if it is authentic, parses the payload.
+     *
+     * @param rawBody the exact bytes of the request body
+     * @param signatureHeader value of {@code x-qvapay-signature}
+     * @param timestampHeader value of {@code x-qvapay-timestamp}
+     * @return the verified event
+     * @throws WebhookVerificationException if it must be rejected, including a valid signature over
+     *     a payload without {@code transaction_uuid}
+     */
+    public VerifiedWebhook<InvoiceWebhookEvent> verifyInvoice(
+            byte[] rawBody, String signatureHeader, String timestampHeader) {
+        verify(rawBody, signatureHeader, timestampHeader);
+        InvoiceWebhookEvent event = parse(rawBody, InvoiceWebhookEvent.class);
+        if (event.transactionUuid() == null || event.transactionUuid().isBlank()) {
+            throw new WebhookVerificationException(WebhookFailure.INVALID_PAYLOAD, null);
+        }
+        return new VerifiedWebhook<>(event, parseTimestampOrNull(timestampHeader));
+    }
+
+    private static <T> T parse(byte[] rawBody, Class<T> type) {
+        try {
+            return JsonCodec.read(rawBody, type);
+        } catch (SerializationException e) {
+            throw new WebhookVerificationException(WebhookFailure.INVALID_PAYLOAD, e);
         }
     }
 
