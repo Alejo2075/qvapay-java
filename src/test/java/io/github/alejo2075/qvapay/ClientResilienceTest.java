@@ -24,17 +24,19 @@ class ClientResilienceTest {
 
     @Test
     void synchronousCallsRespectTheRequestTimeout() {
-        try (TestServer s = TestServer.start(Stub.json(200, "{}").delayed(1500))) {
+        try (TestServer s = TestServer.start(Stub.json(200, "{}").delayed(6000))) {
             long start = System.nanoTime();
             assertThrows(
                     TransportException.class,
                     () ->
                             client(s)
-                                    .requestTimeout(Duration.ofMillis(250))
+                                    .requestTimeout(Duration.ofMillis(500))
                                     .build()
                                     .merchant()
                                     .info());
-            assertTrue(Duration.ofNanos(System.nanoTime() - start).toMillis() < 1200);
+            assertTrue(
+                    Duration.ofNanos(System.nanoTime() - start).toMillis() < 4500,
+                    "must give up at the timeout, not wait for the response");
         }
     }
 

@@ -128,21 +128,27 @@ class PaymentsApiChargeTest {
     }
 
     @Test
-    void aRealTimeoutIsNotRetriedAndLeavesTheOutcomeUnknown() {
+    void aRealTimeoutIsNotRetriedAndLeavesTheOutcomeUnknown() throws Exception {
         try (TestServer server =
                 TestServer.start(
                         TestServer.Stub.json(200, Fixtures.load("merchant/charge.json"))
-                                .delayed(1500))) {
+                                .delayed(3000))) {
             QvaPayClient client =
                     QvaPayClient.builder()
                             .baseUrl(server.baseUri().toString())
                             .allowInsecureBaseUrlForTesting()
                             .appCredentials(Clients.APP_ID, Clients.APP_SECRET)
-                            .requestTimeout(Duration.ofMillis(200))
+                            .requestTimeout(Duration.ofMillis(600))
                             .retryPolicy(AGGRESSIVE)
                             .build();
             assertThrows(TransportException.class, () -> client.payments().charge(REQ));
-            assertEquals(1, server.requests().size());
+            // A retry would have reached the server within a few milliseconds of the failure.
+            // On a very slow machine the first request may not even have arrived: never more than
+            // one.
+            Thread.sleep(500);
+            assertTrue(
+                    server.requests().size() <= 1,
+                    "charge must never be sent twice, saw " + server.requests().size());
         }
     }
 

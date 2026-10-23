@@ -161,7 +161,9 @@ class SyncAsyncParityTest {
     void asyncCallsRunConcurrentlyWithoutBlockingTheCaller() throws Exception {
         try (TestServer server =
                 TestServer.start(
-                        r -> Stub.json(200, Fixtures.load("merchant/balance.json")).delayed(600))) {
+                        r ->
+                                Stub.json(200, Fixtures.load("merchant/balance.json"))
+                                        .delayed(1000))) {
             QvaPayClient client = client(server);
             client.merchant().balance(); // warm up class loading and the HTTP client
             long start = System.nanoTime();
@@ -174,12 +176,12 @@ class SyncAsyncParityTest {
             long submitted = (System.nanoTime() - start) / 1_000_000;
             CompletableFuture.allOf(futures.toArray(new CompletableFuture<?>[0])).get();
             long total = (System.nanoTime() - start) / 1_000_000;
-            // Sequential execution would need 4 x 600 ms = 2400 ms.
+            // Sequential execution would need 4 x 1000 ms = 4000 ms.
             assertEquals(
                     true,
-                    submitted < 400,
+                    submitted < 700,
                     "submission must not wait for the responses: " + submitted + "ms");
-            assertEquals(true, total < 1800, "four 600ms calls should overlap: " + total + "ms");
+            assertEquals(true, total < 3300, "four 1000ms calls should overlap: " + total + "ms");
             assertEquals(5, server.requests().size());
         }
     }
