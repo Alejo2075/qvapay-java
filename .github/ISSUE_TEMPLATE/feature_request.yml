@@ -1,0 +1,15 @@
+name: Feature request
+description: Suggest an endpoint or improvement
+labels: [enhancement]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What do you need?
+    validations:
+      required: true
+  - type: input
+    id: docs
+    attributes:
+      label: Link to the official QvaPay documentation for the endpoint
+      description: Endpoints without public documentation will not be implemented.
