@@ -3,7 +3,7 @@ package io.github.alejo2075.qvapay.http;
 import java.util.concurrent.CompletableFuture;
 
 /**
- * Sends resolved HTTP requests. The default implementation is {@code JdkHttpTransport}; a custom
+ * Sends resolved HTTP requests. The default implementation is {@link JdkHttpTransport}; a custom
  * one can be injected into the client builder, for example in tests.
  *
  * <p>Implementations must be thread-safe, must not follow redirects and must not log requests,
