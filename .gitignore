@@ -1,0 +1,21 @@
+# Build output
+target/
+build/
+.gradle/
+out/
+
+# IDEs
+.idea/
+*.iml
+.vscode/
+
+# Secrets - never commit real credentials
+.env
+.env.*
+!.env.example
+*.gpg
+*.key
+settings-ci.xml
+
+# OS
+.DS_Store
