@@ -1,0 +1,24 @@
+version: 2
+updates:
+  - package-ecosystem: maven
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+  - package-ecosystem: maven
+    directories:
+      - /examples/plain-java
+      - /examples/webhook
+    schedule:
+      interval: weekly
+  - package-ecosystem: gradle
+    directories:
+      - /examples/gradle-java
+      - /examples/gradle-groovy
+    schedule:
+      interval: weekly
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+# Dependabot only opens pull requests. Nothing is merged or published automatically.
