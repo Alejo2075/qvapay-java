@@ -12,7 +12,7 @@
 
 > **SDK no oficial.** Este proyecto lo mantiene la comunidad y no tiene relación con QvaPay, ni cuenta con su respaldo o soporte. Documentación oficial de la API: <https://www.qvapay.com/docs>.
 
-> **Estado: pre-release (`0.1.0-SNAPSHOT`).** Estado del paquete: todavía no está publicado en Maven Central. Mira [Instalación](#instalación) para usarlo desde una compilación local.
+> **Estado: pre-release (`0.1.0`).** Estado del paquete: todavía no está publicado en Maven Central. Mira [Instalación](#instalación) para usarlo desde una compilación local.
 
 [![CI](https://github.com/Alejo2075/qvapay-java/actions/workflows/ci.yml/badge.svg)](https://github.com/Alejo2075/qvapay-java/actions/workflows/ci.yml) ![License](https://img.shields.io/badge/license-MIT-blue) ![Java](https://img.shields.io/badge/Java-17%2B-orange) ![Status](https://img.shields.io/badge/status-pre--release-yellow)
 
@@ -65,7 +65,7 @@
 <dependency>
   <groupId>io.github.alejo2075</groupId>
   <artifactId>qvapay-java</artifactId>
-  <version>0.1.0-SNAPSHOT</version>
+  <version>0.1.0</version>
 </dependency>
 ```
 
@@ -78,7 +78,7 @@ repositories {
 }
 
 dependencies {
-    implementation("io.github.alejo2075:qvapay-java:0.1.0-SNAPSHOT")
+    implementation("io.github.alejo2075:qvapay-java:0.1.0")
 }
 ```
 
@@ -91,7 +91,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'io.github.alejo2075:qvapay-java:0.1.0-SNAPSHOT'
+    implementation 'io.github.alejo2075:qvapay-java:0.1.0'
 }
 ```
 
