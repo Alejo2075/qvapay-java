@@ -11,6 +11,36 @@
 
   <name>QvaPay Java SDK</name>
   <description>Unofficial, community-maintained, type-safe and framework-agnostic Java SDK for the QvaPay API.</description>
+  <url>https://github.com/Alejo2075/qvapay-java</url>
+  <inceptionYear>2026</inceptionYear>
+
+  <licenses>
+    <license>
+      <name>MIT License</name>
+      <url>https://opensource.org/license/mit</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <id>Alejo2075</id>
+      <name>Alejandro Santana</name>
+      <url>https://github.com/Alejo2075</url>
+    </developer>
+  </developers>
+
+  <scm>
+    <connection>scm:git:https://github.com/Alejo2075/qvapay-java.git</connection>
+    <developerConnection>scm:git:https://github.com/Alejo2075/qvapay-java.git</developerConnection>
+    <url>https://github.com/Alejo2075/qvapay-java</url>
+    <tag>HEAD</tag>
+  </scm>
+
+  <issueManagement>
+    <system>GitHub Issues</system>
+    <url>https://github.com/Alejo2075/qvapay-java/issues</url>
+  </issueManagement>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
