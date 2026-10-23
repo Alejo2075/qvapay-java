@@ -120,6 +120,8 @@ public static void main(String[] args) {
 }
 ```
 
+> **Test mode.** With an app in test mode QvaPay marks the invoice as `paid` immediately and returns no payment page, so `invoice.url()` is `null` there. Outside test mode `url()` is the payment page for the customer.
+
 Imports:
 
 <!-- snippet:plain-java/QuickStart.java#imports -->
