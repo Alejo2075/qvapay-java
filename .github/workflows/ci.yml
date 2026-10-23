@@ -45,3 +45,35 @@ jobs:
           cache: maven
       - name: Verify
         run: ./mvnw -B -ntp clean verify
+
+  examples:
+    name: Example consumers (JDK ${{ matrix.java }})
+    runs-on: ubuntu-latest
+    needs: build
+    strategy:
+      fail-fast: false
+      matrix:
+        java: ['17', '21']
+    steps:
+      - uses: actions/checkout@v4
+      # JDK 17 is always installed: the Gradle examples use a Java 17 toolchain.
+      # The last entry becomes the default JAVA_HOME.
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: |
+            17
+            ${{ matrix.java }}
+          cache: maven
+      # Consumers use the jar installed in ~/.m2, exactly like an external project would.
+      - name: Install the SDK locally
+        run: ./mvnw -B -ntp install -DskipTests
+      - name: Maven examples
+        run: |
+          ./mvnw -B -ntp -f examples/plain-java/pom.xml clean verify
+          ./mvnw -B -ntp -f examples/webhook/pom.xml clean verify
+      - name: Gradle examples
+        run: |
+          for dir in examples/gradle-java examples/gradle-groovy; do
+            (cd "$dir" && ./gradlew --no-daemon test -Porg.gradle.java.installations.fromEnv=JAVA_HOME_17_X64)
+          done
