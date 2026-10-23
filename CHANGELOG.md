@@ -6,6 +6,10 @@ All notable changes to this project are documented here. The format follows
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-10-23
+
+Patch release found by running the SDK against a real app in test mode (see `docs/api-coverage.md`, "Live verification").
+
 ### Fixed
 
 - `merchant().balance()` failed against the real API, which answers with the bare number (`25`) instead of the documented `{"balance": 25}`. Both forms are now accepted.

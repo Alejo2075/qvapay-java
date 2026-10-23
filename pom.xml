@@ -6,7 +6,7 @@
 
   <groupId>io.github.alejo2075</groupId>
   <artifactId>qvapay-java</artifactId>
-  <version>0.2.0-SNAPSHOT</version>
+  <version>0.1.1</version>
   <packaging>jar</packaging>
 
   <name>QvaPay Java SDK</name>
