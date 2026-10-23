@@ -124,6 +124,31 @@ public final class WebhookVerifier {
         return new VerifiedWebhook<>(event, parseTimestampOrNull(timestampHeader));
     }
 
+    /**
+     * Verifies a top-up webhook and, only if it is authentic, parses the payload.
+     *
+     * <p>Top-up webhooks are signed only when the top-up was created with app credentials. A
+     * webhook without signature is <strong>always rejected</strong> ({@link
+     * WebhookFailure#MISSING_SIGNATURE}): create top-ups with app credentials, not with a user
+     * Bearer token, if you depend on this notification.
+     *
+     * @param rawBody the exact bytes of the request body
+     * @param signatureHeader value of {@code x-qvapay-signature}
+     * @param timestampHeader value of {@code x-qvapay-timestamp}
+     * @return the verified event
+     * @throws WebhookVerificationException if it must be rejected, including a valid signature over
+     *     a payload without {@code uuid} (for example an invoice webhook)
+     */
+    public VerifiedWebhook<TopUpWebhookEvent> verifyTopUp(
+            byte[] rawBody, String signatureHeader, String timestampHeader) {
+        verify(rawBody, signatureHeader, timestampHeader);
+        TopUpWebhookEvent event = parse(rawBody, TopUpWebhookEvent.class);
+        if (event.uuid() == null || event.uuid().isBlank()) {
+            throw new WebhookVerificationException(WebhookFailure.INVALID_PAYLOAD, null);
+        }
+        return new VerifiedWebhook<>(event, parseTimestampOrNull(timestampHeader));
+    }
+
     private static <T> T parse(byte[] rawBody, Class<T> type) {
         try {
             return JsonCodec.read(rawBody, type);

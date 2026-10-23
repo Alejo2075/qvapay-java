@@ -6,7 +6,7 @@ import java.time.Instant;
 
 /**
  * Payload of the invoice webhook, sent when a payment changes state. It identifies the payment with
- * {@code transaction_uuid}; top-ups use a different event ({@code TopUpWebhookEvent}).
+ * {@code transaction_uuid}; top-ups use a different event ({@link TopUpWebhookEvent}).
  *
  * <p>The webhook can arrive more than once. Use {@link #transactionUuid()} as the idempotency key.
  *
