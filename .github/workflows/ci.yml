@@ -77,3 +77,10 @@ jobs:
           for dir in examples/gradle-java examples/gradle-groovy; do
             (cd "$dir" && ./gradlew --no-daemon test -Porg.gradle.java.installations.fromEnv=JAVA_HOME_17_X64)
           done
+
+  readme-snippets:
+    name: README snippets match the compiled examples
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 scripts/readme_snippets.py check
