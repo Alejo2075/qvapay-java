@@ -70,11 +70,14 @@ jobs:
       # Consumers use the jar installed in ~/.m2, exactly like an external project would.
       - name: Install the SDK locally
         run: ./mvnw -B -ntp install -DskipTests
-      - name: Maven examples
+      # The Maven examples compile against the jar just installed from this checkout.
+      - name: Maven examples (current source)
         run: |
-          ./mvnw -B -ntp -f examples/plain-java/pom.xml clean verify
-          ./mvnw -B -ntp -f examples/webhook/pom.xml clean verify
-      - name: Gradle examples
+          version="$(./mvnw -B -ntp -q help:evaluate -Dexpression=project.version -DforceStdout)"
+          ./mvnw -B -ntp -f examples/plain-java/pom.xml -Dqvapay.version="$version" clean verify
+          ./mvnw -B -ntp -f examples/webhook/pom.xml -Dqvapay.version="$version" clean verify
+      # The Gradle examples consume the artifact published on Maven Central, like any user would.
+      - name: Gradle examples (published release from Maven Central)
         run: |
           for dir in examples/gradle-java examples/gradle-groovy; do
             (cd "$dir" && ./gradlew --no-daemon test -Porg.gradle.java.installations.fromEnv=JAVA_HOME_17_X64)
