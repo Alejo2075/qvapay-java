@@ -4,6 +4,8 @@ import io.github.alejo2075.qvapay.auth.AuthPolicy;
 import io.github.alejo2075.qvapay.internal.JsonCodec;
 import io.github.alejo2075.qvapay.internal.Operation;
 import io.github.alejo2075.qvapay.internal.RequestExecutor;
+import io.github.alejo2075.qvapay.internal.UrlEncoding;
+import io.github.alejo2075.qvapay.model.AppTransactionDetailResponse;
 import io.github.alejo2075.qvapay.model.AppTransactionPageResponse;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -79,5 +81,45 @@ public final class TransactionApi {
         body.put("page", page);
         body.put("take", take);
         return Operation.post("/v2/transactions", body, AuthPolicy.APP, true);
+    }
+
+    /**
+     * Returns one transaction of the app, including the payer once it has been paid.
+     *
+     * <p>Use it to confirm a payment on your server before delivering goods, in addition to
+     * verifying the signed webhook.
+     *
+     * @param uuid the transaction UUID ({@code transaction_uuid} of the invoice)
+     * @return the transaction
+     * @throws io.github.alejo2075.qvapay.exception.NotFoundException if it does not exist or does
+     *     not belong to the app
+     * @throws IllegalArgumentException if {@code uuid} is blank
+     */
+    public AppTransactionDetailResponse get(String uuid) {
+        return executor.execute(
+                getOp(uuid), b -> JsonCodec.read(b, AppTransactionDetailResponse.class));
+    }
+
+    /**
+     * Asynchronous form of {@link #get(String)}.
+     *
+     * @param uuid the transaction UUID
+     * @return a future with the transaction
+     */
+    public CompletableFuture<AppTransactionDetailResponse> getAsync(String uuid) {
+        try {
+            return executor.executeAsync(
+                    getOp(uuid), b -> JsonCodec.read(b, AppTransactionDetailResponse.class));
+        } catch (IllegalArgumentException e) {
+            return CompletableFuture.failedFuture(e);
+        }
+    }
+
+    private static Operation getOp(String uuid) {
+        if (uuid == null || uuid.isBlank()) {
+            throw new IllegalArgumentException("uuid is required");
+        }
+        return Operation.post(
+                "/v2/transactions/" + UrlEncoding.encode(uuid), null, AuthPolicy.APP, true);
     }
 }
