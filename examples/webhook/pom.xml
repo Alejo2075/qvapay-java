@@ -14,7 +14,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.release>17</maven.compiler.release>
     <!-- Install the SDK first: ./mvnw install (from the repository root). -->
-    <qvapay.version>0.1.0</qvapay.version>
+    <qvapay.version>0.1.1</qvapay.version>
   </properties>
 
   <dependencies>

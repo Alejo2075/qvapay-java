@@ -7,6 +7,7 @@ How to publish the SDK to Maven Central. **Nothing here runs automatically and n
 | Version | Date | Notes |
 |---|---|---|
 | 0.1.0 | 2026-10-23 | First release; published to Maven Central, signed with key `BC2FB2385127DC8345884595564BA523FA3BCCF6` (expires 2028-10-22, renew before then). Verified from clean Maven and Gradle consumers and with `gpg --verify` against the public keyserver. |
+| 0.1.1 | 2026-10-23 | Patch: `balance()` accepts the bare-number response of the real API; `Invoice` exposes the test-mode fields (constructor change). Found by the manual check against a test-mode app. Verified from clean Maven/Gradle consumers, `gpg --verify` of all four artifacts, and the live check run with the published jar. |
 
 The signing key backup and its passphrase are kept by the maintainer outside the repository. Rotate the Portal token after any exposure.
 

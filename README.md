@@ -12,9 +12,9 @@
 
 > **Unofficial SDK.** This project is community maintained and is not affiliated with, endorsed by or supported by QvaPay. Official API documentation: <https://www.qvapay.com/docs>.
 
-> **Status: `0.1.0` is available on [Maven Central](https://central.sonatype.com/artifact/io.github.alejo2075/qvapay-java).** Early release: the API follows the public QvaPay docs and has been tested offline only (see [Features](#features)).
+> **Status: `0.1.1` is available on [Maven Central](https://central.sonatype.com/artifact/io.github.alejo2075/qvapay-java).** Early release: the API follows the public QvaPay docs and has been tested offline only (see [Features](#features)).
 
-[![CI](https://github.com/Alejo2075/qvapay-java/actions/workflows/ci.yml/badge.svg)](https://github.com/Alejo2075/qvapay-java/actions/workflows/ci.yml) [![Maven Central](https://img.shields.io/maven-central/v/io.github.alejo2075/qvapay-java)](https://central.sonatype.com/artifact/io.github.alejo2075/qvapay-java) [![Javadoc](https://img.shields.io/badge/javadoc-0.1.0-blue)](https://alejo2075.github.io/qvapay-java/) ![License](https://img.shields.io/badge/license-MIT-blue) ![Java](https://img.shields.io/badge/Java-17%2B-orange)
+[![CI](https://github.com/Alejo2075/qvapay-java/actions/workflows/ci.yml/badge.svg)](https://github.com/Alejo2075/qvapay-java/actions/workflows/ci.yml) [![Maven Central](https://img.shields.io/maven-central/v/io.github.alejo2075/qvapay-java)](https://central.sonatype.com/artifact/io.github.alejo2075/qvapay-java) [![Javadoc](https://img.shields.io/badge/javadoc-0.1.1-blue)](https://alejo2075.github.io/qvapay-java/) ![License](https://img.shields.io/badge/license-MIT-blue) ![Java](https://img.shields.io/badge/Java-17%2B-orange)
 
 ---
 
@@ -59,7 +59,7 @@ Available on Maven Central; no extra repositories are needed.
 <dependency>
   <groupId>io.github.alejo2075</groupId>
   <artifactId>qvapay-java</artifactId>
-  <version>0.1.0</version>
+  <version>0.1.1</version>
 </dependency>
 ```
 
@@ -71,7 +71,7 @@ repositories {
 }
 
 dependencies {
-    implementation("io.github.alejo2075:qvapay-java:0.1.0")
+    implementation("io.github.alejo2075:qvapay-java:0.1.1")
 }
 ```
 
@@ -83,7 +83,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'io.github.alejo2075:qvapay-java:0.1.0'
+    implementation 'io.github.alejo2075:qvapay-java:0.1.1'
 }
 ```
 
@@ -271,7 +271,7 @@ Jackson 3 (`tools.jackson`) is an implementation detail and does not clash with 
 | Reference repositories studied | [docs/references.md](docs/references.md) |
 | Release procedure | [docs/release.md](docs/release.md) |
 | Javadoc (API reference) | <https://alejo2075.github.io/qvapay-java/> (also `./mvnw javadoc:javadoc` locally) |
-| Maven artifact | [`io.github.alejo2075:qvapay-java:0.1.0`](https://central.sonatype.com/artifact/io.github.alejo2075/qvapay-java) on Maven Central |
+| Maven artifact | [`io.github.alejo2075:qvapay-java:0.1.1`](https://central.sonatype.com/artifact/io.github.alejo2075/qvapay-java) on Maven Central |
 | Official QvaPay API | <https://www.qvapay.com/docs> |
 
 ## Contributing, roadmap, license
