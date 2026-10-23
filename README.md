@@ -14,7 +14,7 @@
 
 > **Status: pre-release (`0.1.0-SNAPSHOT`).** Package status: not yet published to Maven Central. See [Installation](#installation) to use it from a local build.
 
-![License](https://img.shields.io/badge/license-MIT-blue) ![Java](https://img.shields.io/badge/Java-17%2B-orange) ![Status](https://img.shields.io/badge/status-pre--release-yellow)
+[![CI](https://github.com/Alejo2075/qvapay-java/actions/workflows/ci.yml/badge.svg)](https://github.com/Alejo2075/qvapay-java/actions/workflows/ci.yml) ![License](https://img.shields.io/badge/license-MIT-blue) ![Java](https://img.shields.io/badge/Java-17%2B-orange) ![Status](https://img.shields.io/badge/status-pre--release-yellow)
 
 ---
 
@@ -54,7 +54,7 @@ All behaviour is derived from the public QvaPay docs; see [docs/api-coverage.md]
 > Package status: not yet published to Maven Central. Until the first release, build and install it locally:
 >
 > ```bash
-> git clone <your fork or clone URL of this repository>
+> git clone https://github.com/Alejo2075/qvapay-java.git
 > cd qvapay-java
 > ./mvnw install
 > ```
