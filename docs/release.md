@@ -20,13 +20,14 @@ The old OSSRH/Nexus staging flow is not used. Published versions are immutable: 
 
 These steps cannot be done by the build or by an assistant:
 
-- [ ] Create the public GitHub repository `Alejo2075/qvapay-java` (the POM, README and SCM data already point at it) and push the code.
+- [x] Public GitHub repository `Alejo2075/qvapay-java` created and pushed.
 - [ ] Verify the namespace `io.github.alejo2075` in the [Central Portal](https://central.sonatype.com/publishing/namespaces) (log in with GitHub and follow the instructions to prove ownership).
 - [ ] Confirm the maintainer data and the license (`LICENSE` is MIT, © 2026 Alejo2075; the POM lists *Alejandro Santana* as developer). Change both if you prefer other public details.
 - [ ] Generate a **Portal user token** (Central Portal → Account → *Generate User Token*).
 - [ ] Create a GPG key pair, publish the public key to a keyserver (for example `keys.openpgp.org`), keep the private key out of the repository.
-- [ ] In GitHub: create the environment `maven-central` with **required reviewers**, and add its secrets `CENTRAL_TOKEN_USERNAME`, `CENTRAL_TOKEN_PASSWORD`, `GPG_PRIVATE_KEY` (ASCII-armored export) and `GPG_PASSPHRASE`.
-- [ ] Protect `main` (pull request, required status checks, no force-push).
+- [x] GitHub environment `maven-central` exists with a required reviewer and is limited to protected branches.
+- [ ] Add the environment secrets (Settings → Environments → maven-central) `CENTRAL_TOKEN_USERNAME`, `CENTRAL_TOKEN_PASSWORD`, `GPG_PRIVATE_KEY` (ASCII-armored export) and `GPG_PASSPHRASE`.
+- [x] `main` protected (pull request, required status checks, no force-push, linear history). Private vulnerability reporting, secret scanning with push protection and Dependabot alerts are enabled.
 - [ ] A QvaPay app in **test mode** if you want to run the manual integration checks below.
 - [ ] Explicit approval to publish.
 
