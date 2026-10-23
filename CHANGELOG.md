@@ -15,3 +15,4 @@ All notable changes to this project are documented here. The format follows
 - Invoices `modify()` (`POST /v2/modify_invoice`), distinguishing an absent `expire_at` from an explicit `null` (`resetExpireAt()`).
 - Transactions `list(page, take)` (`POST /v2/transactions`, parameters in the JSON body) with tolerant `TransactionStatus`.
 - Transactions `get(uuid)` (`POST /v2/transactions/{uuid}`) with the `PaidBy` payer.
+- Payments `authorize()` (`POST /v2/authorize_payments`): returns the consent URL for the user; never retried.

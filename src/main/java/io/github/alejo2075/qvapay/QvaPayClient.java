@@ -39,6 +39,7 @@ public final class QvaPayClient {
     private final MerchantApi merchant;
     private final InvoiceApi invoices;
     private final TransactionApi transactions;
+    private final PaymentsApi payments;
 
     private QvaPayClient(ClientSettings settings) {
         this.settings = settings;
@@ -46,6 +47,7 @@ public final class QvaPayClient {
         this.merchant = new MerchantApi(executor);
         this.invoices = new InvoiceApi(executor);
         this.transactions = new TransactionApi(executor);
+        this.payments = new PaymentsApi(executor);
     }
 
     /**
@@ -82,6 +84,15 @@ public final class QvaPayClient {
      */
     public TransactionApi transactions() {
         return transactions;
+    }
+
+    /**
+     * Returns the direct payment operations (authorize, charge).
+     *
+     * @return the payments API
+     */
+    public PaymentsApi payments() {
+        return payments;
     }
 
     /**

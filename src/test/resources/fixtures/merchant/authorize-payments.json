@@ -1,0 +1,4 @@
+{
+  "message": "Authorize payments",
+  "url": "https://qvapay.com/authorize_payments?app_uuid=tu-app-uuid&remote_id=user-001&callback=https%3A%2F%2Fmitienda.com%2Fauth%2Fcallback"
+}

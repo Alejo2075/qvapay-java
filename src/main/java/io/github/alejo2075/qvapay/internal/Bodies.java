@@ -1,5 +1,6 @@
 package io.github.alejo2075.qvapay.internal;
 
+import io.github.alejo2075.qvapay.model.AuthorizePaymentsRequest;
 import io.github.alejo2075.qvapay.model.CreateInvoiceRequest;
 import io.github.alejo2075.qvapay.model.InvoiceProduct;
 import io.github.alejo2075.qvapay.model.ModifyInvoiceRequest;
@@ -67,6 +68,19 @@ public final class Bodies {
         if (r.expireAtSpecified()) {
             m.put("expire_at", r.expireAt() == null ? null : Validation.iso(r.expireAt()));
         }
+        return m;
+    }
+
+    /**
+     * Body of {@code POST /v2/authorize_payments}.
+     *
+     * @param r the request
+     * @return the body fields
+     */
+    public static Map<String, Object> authorizePayments(AuthorizePaymentsRequest r) {
+        Map<String, Object> m = new LinkedHashMap<>();
+        m.put("remote_id", r.remoteId());
+        m.put("callback", r.callback());
         return m;
     }
 
