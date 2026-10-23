@@ -12,9 +12,9 @@
 
 > **SDK no oficial.** Este proyecto lo mantiene la comunidad y no tiene relación con QvaPay, ni cuenta con su respaldo o soporte. Documentación oficial de la API: <https://www.qvapay.com/docs>.
 
-> **Estado: `0.1.0` disponible en [Maven Central](https://central.sonatype.com/artifact/io.github.alejo2075/qvapay-java).** Versión temprana: sigue la documentación pública de QvaPay y solo se ha probado sin red (ver [Funcionalidades](#funcionalidades)).
+> **Estado: `0.1.1` disponible en [Maven Central](https://central.sonatype.com/artifact/io.github.alejo2075/qvapay-java).** Versión temprana: sigue la documentación pública de QvaPay y solo se ha probado sin red (ver [Funcionalidades](#funcionalidades)).
 
-[![CI](https://github.com/Alejo2075/qvapay-java/actions/workflows/ci.yml/badge.svg)](https://github.com/Alejo2075/qvapay-java/actions/workflows/ci.yml) [![Maven Central](https://img.shields.io/maven-central/v/io.github.alejo2075/qvapay-java)](https://central.sonatype.com/artifact/io.github.alejo2075/qvapay-java) [![Javadoc](https://img.shields.io/badge/javadoc-0.1.0-blue)](https://alejo2075.github.io/qvapay-java/) ![License](https://img.shields.io/badge/license-MIT-blue) ![Java](https://img.shields.io/badge/Java-17%2B-orange)
+[![CI](https://github.com/Alejo2075/qvapay-java/actions/workflows/ci.yml/badge.svg)](https://github.com/Alejo2075/qvapay-java/actions/workflows/ci.yml) [![Maven Central](https://img.shields.io/maven-central/v/io.github.alejo2075/qvapay-java)](https://central.sonatype.com/artifact/io.github.alejo2075/qvapay-java) [![Javadoc](https://img.shields.io/badge/javadoc-0.1.1-blue)](https://alejo2075.github.io/qvapay-java/) ![License](https://img.shields.io/badge/license-MIT-blue) ![Java](https://img.shields.io/badge/Java-17%2B-orange)
 
 ---
 
@@ -59,7 +59,7 @@ Disponible en Maven Central; no necesitas repositorios adicionales.
 <dependency>
   <groupId>io.github.alejo2075</groupId>
   <artifactId>qvapay-java</artifactId>
-  <version>0.1.0</version>
+  <version>0.1.1</version>
 </dependency>
 ```
 
@@ -71,7 +71,7 @@ repositories {
 }
 
 dependencies {
-    implementation("io.github.alejo2075:qvapay-java:0.1.0")
+    implementation("io.github.alejo2075:qvapay-java:0.1.1")
 }
 ```
 
@@ -83,7 +83,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'io.github.alejo2075:qvapay-java:0.1.0'
+    implementation 'io.github.alejo2075:qvapay-java:0.1.1'
 }
 ```
 
