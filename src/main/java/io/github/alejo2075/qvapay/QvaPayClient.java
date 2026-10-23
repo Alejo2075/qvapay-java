@@ -36,10 +36,12 @@ public final class QvaPayClient {
 
     private final ClientSettings settings;
     private final RequestExecutor executor;
+    private final MerchantApi merchant;
 
     private QvaPayClient(ClientSettings settings) {
         this.settings = settings;
         this.executor = new RequestExecutor(settings);
+        this.merchant = new MerchantApi(executor);
     }
 
     /**
@@ -49,6 +51,15 @@ public final class QvaPayClient {
      */
     public static Builder builder() {
         return new Builder();
+    }
+
+    /**
+     * Returns the application level operations ({@code info}, {@code balance}).
+     *
+     * @return the merchant API
+     */
+    public MerchantApi merchant() {
+        return merchant;
     }
 
     /**

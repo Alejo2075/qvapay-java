@@ -18,10 +18,10 @@ Design of the QvaPay Java SDK (unofficial, community maintained).
 
 ```
 QvaPayClient ──┬── merchant()      MerchantApi    (info, balance)
- (sync)        ├── invoices()      InvoiceApi     (create, modify)
+               ├── invoices()      InvoiceApi     (create, modify)
                ├── transactions()  TransactionApi (list, get)
-               ├── payments()      PaymentsApi    (authorize, charge)
-               └── async()         AsyncQvaPayClient  (same shape, CompletableFuture)
+               └── payments()      PaymentsApi    (authorize, charge)
+               every operation: blocking form + `...Async` form (CompletableFuture)
                          │
                   RequestExecutor (internal)  ──  builds ApiRequest, maps ApiResponse → model or exception
                          │
@@ -30,10 +30,9 @@ QvaPayClient ──┬── merchant()      MerchantApi    (info, balance)
 
 | Package | Contents | Visibility |
 |---|---|---|
-| `io.github.alejo2075.qvapay` | `QvaPayClient`, `AsyncQvaPayClient`, `QvaPayVersion` | public |
+| `io.github.alejo2075.qvapay` | `QvaPayClient`, `MerchantApi`, `InvoiceApi`, `TransactionApi`, `PaymentsApi`, `QvaPayVersion`. The API classes live here so their constructors can be package-private and no internal type leaks into a public signature. | public |
 | `.auth` | `AppCredentials`, `BearerTokenProvider`, `AuthPolicy` | public |
 | `.http` | `HttpTransport`, `JdkHttpTransport`, `ApiRequest`, `ApiResponse`, `RetryPolicy` | public (extension points) |
-| `.api` | `MerchantApi`, `InvoiceApi`, `TransactionApi`, `PaymentsApi` + async twins | public |
 | `.model` | immutable request and response types | public |
 | `.exception` | exception hierarchy | public |
 | `.webhook` | `Webhooks`, `VerifiedWebhook<T>`, event types | public |
@@ -76,7 +75,7 @@ API exceptions expose `statusCode()`, `errorCode()` (the stable `code`, may be n
 Disabled by default. `RetryPolicy` is opt-in and only applies to operations flagged **safe to retry** (read-only calls such as `info`, `balance`, `transactions().list/get`; those are `POST` on the wire, which is why the flag is explicit per operation). `create_invoice`, `modify_invoice`, `authorize_payments` and `charge` are never retried. Backoff is exponential with jitter and honours `Retry-After`. `remote_id` is not treated as an idempotency key.
 
 ### Sync and async
-Every operation is defined once (request builder plus response mapper) and exposed twice: a blocking method and a `CompletableFuture` method on `client.async()`. The blocking path uses `HttpClient.send` so interruption is preserved (the interrupt flag is restored and a `TransportException` is thrown). Async failures complete the future exceptionally with the typed exception as the cause.
+Every operation is defined once (request builder plus response mapper) and exposed twice: a blocking method (`create`) and a `CompletableFuture` method with an `Async` suffix (`createAsync`). The blocking path uses `HttpClient.send` so interruption is preserved (the interrupt flag is restored and a `TransportException` is thrown). Async failures complete the future exceptionally with the typed exception as the cause.
 
 ### HTTP behaviour
 - Base URL `https://api.qvapay.com`. Custom base URLs must be HTTPS unless `allowInsecureBaseUrlForTesting()` is called explicitly.

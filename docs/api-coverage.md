@@ -12,7 +12,7 @@ All merchant operations authenticate with `app-id` + `app-secret` **headers** (n
 
 | Java operation | Method and path | Request | Response shape (not wrapped in `data`) | Doc page | Status |
 |---|---|---|---|---|---|
-| `merchant().info()` | `POST /v2/info` | no body | direct object: `uuid, name, url, desc, callback, success_url, cancel_url, logo, active, enabled, card, created_at, updated_at, app_photo_url` | `/docs/merchants/info` | verified |
+| `merchant().info()` | `POST /v2/info` | no body | direct object: `uuid, name, url, desc, callback, success_url, cancel_url, logo, active, enabled, card, created_at, updated_at, app_photo_url` | `/docs/merchants/info` | tested |
 | `merchant().balance()` | `POST /v2/balance` | no body | `{ "balance": 150.75 }` (USD) | `/docs/merchants/balance` | verified |
 | `invoices().create(r)` | `POST /v2/create_invoice` | `amount`, `description`, `remote_id`; optional `webhook`, `products[]`, `expire_at` | direct: `app_id, amount, description, remote_id, transaction_uuid, expire_at (nullable), url` | `/docs/merchants/create-invoice` | verified |
 | `invoices().modify(r)` | `POST /v2/modify_invoice` | `transaction_uuid` + any of `amount, description, remote_id, webhook, products, expire_at` | same shape as create | `/docs/merchants/modify-invoice` | verified |
