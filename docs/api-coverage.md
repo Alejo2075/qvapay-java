@@ -19,7 +19,7 @@ All merchant operations authenticate with `app-id` + `app-secret` **headers** (n
 | `transactions().list(page, take)` | `POST /v2/transactions` | JSON body `page` (≥1, default 1), `take` (default 30, max 100) | `{ "message": "APP Transactions", "transactions": [...] }` | `/docs/merchants/transactions` | tested |
 | `transactions().get(uuid)` | `POST /v2/transactions/{uuid}` | uuid in path | `{ "message": "APP Transaction", "transaction": {..., "PaidBy": {...} \| null } }` | `/docs/merchants/transaction-detail` | tested |
 | `payments().authorize(r)` | `POST /v2/authorize_payments` | `remote_id`, `callback` | `{ "message": "Authorize payments", "url": "..." }` | `/docs/merchants/authorize-payments` | tested |
-| `payments().charge(r)` | `POST /v2/charge` | `amount`, `user_uuid`, `description`, `remote_id` | `{ "success": true, "message": "...", "transaction": {...} }` | `/docs/merchants/charge` | verified |
+| `payments().charge(r)` | `POST /v2/charge` | `amount`, `user_uuid`, `description`, `remote_id` | `{ "success": true, "message": "...", "transaction": {...} }` | `/docs/merchants/charge` | tested |
 
 ### Field notes
 

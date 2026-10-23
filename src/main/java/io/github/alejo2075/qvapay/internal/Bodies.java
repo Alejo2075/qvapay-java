@@ -1,6 +1,7 @@
 package io.github.alejo2075.qvapay.internal;
 
 import io.github.alejo2075.qvapay.model.AuthorizePaymentsRequest;
+import io.github.alejo2075.qvapay.model.ChargeRequest;
 import io.github.alejo2075.qvapay.model.CreateInvoiceRequest;
 import io.github.alejo2075.qvapay.model.InvoiceProduct;
 import io.github.alejo2075.qvapay.model.ModifyInvoiceRequest;
@@ -81,6 +82,21 @@ public final class Bodies {
         Map<String, Object> m = new LinkedHashMap<>();
         m.put("remote_id", r.remoteId());
         m.put("callback", r.callback());
+        return m;
+    }
+
+    /**
+     * Body of {@code POST /v2/charge}.
+     *
+     * @param r the request
+     * @return the body fields
+     */
+    public static Map<String, Object> charge(ChargeRequest r) {
+        Map<String, Object> m = new LinkedHashMap<>();
+        m.put("amount", r.amount());
+        m.put("user_uuid", r.userUuid());
+        m.put("description", r.description());
+        m.put("remote_id", r.remoteId());
         return m;
     }
 
