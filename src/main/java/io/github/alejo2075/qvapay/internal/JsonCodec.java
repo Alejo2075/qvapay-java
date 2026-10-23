@@ -64,6 +64,38 @@ public final class JsonCodec {
     }
 
     /**
+     * Parses a balance response. QvaPay documents {@code {"balance": 150.75}}, but the live API
+     * (verified 2026-10-23, test mode) answers with the bare number {@code 25}. Both forms, and a
+     * bare or wrapped decimal string, are accepted. The digits are never rounded.
+     *
+     * @param json the raw response body
+     * @return the balance in USD
+     */
+    public static java.math.BigDecimal readBalance(byte[] json) {
+        String text = json == null ? "" : new String(json, StandardCharsets.UTF_8).trim();
+        if (text.isEmpty()) {
+            throw new SerializationException("Empty response body, expected a balance", null);
+        }
+        try {
+            if (text.startsWith("{")) {
+                JsonNode node = MAPPER.readTree(text).get("balance");
+                if (node == null || node.isNull()) {
+                    throw new SerializationException(
+                            "Balance response has no 'balance' field", null);
+                }
+                return new java.math.BigDecimal(
+                        node.isString() ? node.asString().trim() : node.toString());
+            }
+            if (text.startsWith("\"") && text.endsWith("\"") && text.length() >= 2) {
+                text = text.substring(1, text.length() - 1).trim();
+            }
+            return new java.math.BigDecimal(text);
+        } catch (NumberFormatException | JacksonException e) {
+            throw new SerializationException("Could not parse the balance response", e);
+        }
+    }
+
+    /**
      * Parses a JSON document into a tree.
      *
      * @param json the raw bytes

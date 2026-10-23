@@ -15,7 +15,13 @@ import java.time.Instant;
  * @param remoteId your own identifier
  * @param transactionUuid UUID of the transaction in QvaPay
  * @param expireAt expiration time, or {@code null}
- * @param url payment URL to share with the customer
+ * @param url payment URL to share with the customer; {@code null} in test mode, where QvaPay marks
+ *     the invoice as paid immediately and returns no payment page
+ * @param status status reported in the response, or {@code null} (QvaPay returned {@code paid} in
+ *     test mode; production responses are documented without this field)
+ * @param test {@code true} when QvaPay flags the invoice as a test-mode one, otherwise {@code null}
+ * @param reference test-mode reference such as {@code TEST-<uuid>}, otherwise {@code null}
+ * @param testBalance balance of the test wallet after the invoice, otherwise {@code null}
  */
 public record Invoice(
         String appId,
@@ -24,4 +30,8 @@ public record Invoice(
         String remoteId,
         String transactionUuid,
         Instant expireAt,
-        String url) {}
+        String url,
+        TransactionStatus status,
+        Boolean test,
+        String reference,
+        BigDecimal testBalance) {}

@@ -6,6 +6,14 @@ All notable changes to this project are documented here. The format follows
 
 ## [Unreleased]
 
+### Fixed
+
+- `merchant().balance()` failed against the real API, which answers with the bare number (`25`) instead of the documented `{"balance": 25}`. Both forms are now accepted.
+
+### Changed
+
+- `Invoice` gains `status`, `test`, `reference` and `testBalance` (all nullable). QvaPay's test mode returns no `url` and marks the invoice `paid` immediately; `url` is documented as nullable. Constructor users of the `Invoice` record must add the four new arguments.
+
 ## [0.1.0] - 2026-10-23
 
 First release. Unofficial, community-maintained SDK for the QvaPay merchant API (`/v2`), based on the public documentation as of 2026-10-22.
