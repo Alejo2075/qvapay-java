@@ -43,8 +43,10 @@ jobs:
           distribution: temurin
           java-version: '25'
           cache: maven
+      # google-java-format 1.27 (the last release that runs on JDK 17) cannot run on JVM 25.
+      # Formatting is already enforced by the JDK 17 and 21 jobs; this job checks behaviour.
       - name: Verify
-        run: ./mvnw -B -ntp clean verify
+        run: ./mvnw -B -ntp -Dspotless.check.skip=true clean verify
 
   examples:
     name: Example consumers (JDK ${{ matrix.java }})
