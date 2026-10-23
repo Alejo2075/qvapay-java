@@ -1,5 +1,7 @@
 package io.github.alejo2075.qvapay.exception;
 
+import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -22,7 +24,7 @@ public class QvaPayApiException extends QvaPayException {
     private final String apiMessage;
 
     /** Non-sensitive rate limiting headers. */
-    private final Map<String, String> rateLimitHeaders;
+    private final LinkedHashMap<String, String> rateLimitHeaders;
 
     /**
      * Creates an API exception.
@@ -41,7 +43,10 @@ public class QvaPayApiException extends QvaPayException {
         this.statusCode = statusCode;
         this.errorCode = errorCode;
         this.apiMessage = apiMessage;
-        this.rateLimitHeaders = rateLimitHeaders == null ? Map.of() : Map.copyOf(rateLimitHeaders);
+        this.rateLimitHeaders = new LinkedHashMap<String, String>();
+        if (rateLimitHeaders != null) {
+            this.rateLimitHeaders.putAll(rateLimitHeaders);
+        }
     }
 
     /**
@@ -77,7 +82,7 @@ public class QvaPayApiException extends QvaPayException {
      * @return an unmodifiable map with lower-case header names
      */
     public Map<String, String> rateLimitHeaders() {
-        return rateLimitHeaders;
+        return Collections.unmodifiableMap(rateLimitHeaders);
     }
 
     private static String describe(int statusCode, String errorCode, String apiMessage) {
