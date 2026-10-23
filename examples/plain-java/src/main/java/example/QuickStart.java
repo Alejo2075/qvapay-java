@@ -1,10 +1,12 @@
 package example;
 
+// snippet:imports:start
 import io.github.alejo2075.qvapay.QvaPayClient;
 import io.github.alejo2075.qvapay.model.AppBalance;
 import io.github.alejo2075.qvapay.model.CreateInvoiceRequest;
 import io.github.alejo2075.qvapay.model.Invoice;
 import java.math.BigDecimal;
+// snippet:imports:end
 
 /**
  * Quick start. Run it with the credentials of an app in QvaPay <em>test mode</em>:
