@@ -1,0 +1,1 @@
+{"app_id":"00000000-0000-0000-0000-000000000000","amount":"1","description":"SDK manual check 2 (test mode)","remote_id":"sdk-check-raw-1","transaction_uuid":"fd6be71f-1bdf-4a84-ada2-a494d15928b5","expire_at":"2026-11-22T16:22:40.000Z","status":"paid","test":true,"reference":"TEST-fd6be71f-1bdf-4a84-ada2-a494d15928b5","test_balance":26}

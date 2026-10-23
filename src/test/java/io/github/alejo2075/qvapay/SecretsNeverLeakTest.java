@@ -47,7 +47,7 @@ class SecretsNeverLeakTest {
 
     @Test
     void toStringOfEveryConfigurationObjectIsRedacted() {
-        FakeTransport t = FakeTransport.returning(FakeTransport.json(200, "{}"));
+        FakeTransport t = FakeTransport.returning(FakeTransport.json(200, "{\"balance\":1}"));
         QvaPayClient client =
                 QvaPayClient.builder()
                         .appCredentials(APP_ID, SECRET)

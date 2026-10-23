@@ -58,7 +58,7 @@ public final class MerchantApi {
      * @throws io.github.alejo2075.qvapay.exception.QvaPayException on any other failure
      */
     public AppBalance balance() {
-        return executor.execute(BALANCE, b -> JsonCodec.read(b, AppBalance.class));
+        return executor.execute(BALANCE, b -> new AppBalance(JsonCodec.readBalance(b)));
     }
 
     /**
@@ -67,6 +67,6 @@ public final class MerchantApi {
      * @return a future with the balance
      */
     public CompletableFuture<AppBalance> balanceAsync() {
-        return executor.executeAsync(BALANCE, b -> JsonCodec.read(b, AppBalance.class));
+        return executor.executeAsync(BALANCE, b -> new AppBalance(JsonCodec.readBalance(b)));
     }
 }
