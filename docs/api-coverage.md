@@ -60,7 +60,23 @@ Run by hand with SDK 0.1.0/0.2.0-SNAPSHOT against `https://api.qvapay.com` using
 | wrong `app-secret` | 401 `Unauthorized` | message text only; no `code` |
 | invoice webhook | verified only with a locally signed payload | QvaPay's own webhook delivery was not exercised (needs a public HTTPS endpoint) |
 
-Not verified live: a real (non-test) invoice, `url` format in production, `modify_invoice` on a pending invoice, `authorize_payments`, `charge`, top-up webhook, delivery retries, rate-limit headers.
+Second round (same day, published 0.1.1, test-mode app, safe calls only):
+
+| Operation | Result | Notes |
+|---|---|---|
+| `POST /v2/authorize_payments` | 400 `No tienes habilitado el acceso a pagos autorizados` | Matches the documented requirement: the app lacks `allowed_payment_auth`, which QvaPay support must enable. So the consent URL and `charge` could not be exercised. |
+| `POST /v2/charge` with a nonexistent user UUID, 0.01 USD | 404 `Usuario no encontrado` | Matches the docs (404 user not found); typed as `NotFoundException`. It cannot charge anyone. |
+| `create_invoice` with `webhook`, `expire_at` and two `products` (one without `quantity`) | OK | `expire_at` returned as sent; the product without `quantity` comes back with `quantity: 1`, as documented. `amount` `1.50` comes back as `"1.5"`. |
+| `create_invoice` with `amount: 0` or a missing `description` | 400 `Faltan campos requeridos` | the server treats `0` as missing |
+| `create_invoice` with `amount: 100001` | 400 `El monto debe ser un número positivo entre 0 y 100000` | same limit the SDK enforces locally |
+| `create_invoice` with an invalid `webhook` / past `expire_at` | 400 `El webhook debe ser una URL válida` / `expire_at debe ser una fecha futura` | same rules the SDK enforces locally |
+| `authorize_payments` without `callback` | 400 `Faltan campos requeridos` | |
+| any `/v2/*` call without credentials | 401 `Unauthorized` | |
+| `transactions` with `page=2, take=1` | OK, empty | consistent with the empty list above |
+
+Error bodies seen so far are always `{"error": "<Spanish message>"}` with no `code`; no rate-limit headers were observed in these few calls.
+
+Not verified live: a real (non-test) invoice, `url` format in production, `modify_invoice` on a pending invoice, a successful `authorize_payments` and `charge` (the app needs `allowed_payment_auth`), top-up webhook, delivery retries, rate-limit headers.
 
 ## Webhooks (release 0.1.0)
 
