@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="docs/assets/logo.png" alt="QvaPay Java SDK" width="560">
+<img src="docs/assets/logo.png" alt="QvaPay Java SDK" width="640">
 
 **Un SDK de Java ligero, tipado y sin dependencia de frameworks para la API de QvaPay.**
 
